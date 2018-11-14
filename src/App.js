@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import * as Utils from './utils.js'
 import axios from 'axios'
-import ListView from './ListView.js'
+import ListView from './components/ListView.js'
 
 class App extends Component {
 
