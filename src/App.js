@@ -85,6 +85,9 @@ class App extends Component {
       id: v.venue.id
     })
 
+    console.log(marker)
+
+
     markers.push(marker);
 
     marker.addListener('click', function() {
