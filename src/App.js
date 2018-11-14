@@ -14,17 +14,22 @@ class App extends Component {
       query: "restaurants",
       near: "Jackson, TN",
       v: "20182507"
-    }
+    },
+    markers: []
   }
 
   componentDidMount () {
     this.getVenues()
   }
 
+  // Render Google Map
+  
   renderMap = () => {
     Utils.loadScript()
     window.initMap = this.initMap
   }
+
+  // Get Venues from Foursquare API
 
   getVenues = () => {
 
@@ -46,6 +51,8 @@ class App extends Component {
       zoom: 11
     });
 
+  const markers = []
+
   this.state.venues.map( v => {
     var contentString = '<h3>'+ v.venue.name + '</h3';
 
@@ -53,22 +60,28 @@ class App extends Component {
     var marker = new window.google.maps.Marker({
       position: {lat: v.venue.location.lat, lng: v.venue.location.lng},
       map: map,
-      title: 'Hello World!',
+      title: v.venue.name,
       animation: window.google.maps.Animation.DROP
     })
+
+    markers.push(marker);
 
     return marker.addListener('click', function() {
       infowindow.setContent(contentString);
       infowindow.open(map, marker);
     });
+
   })
+
+  this.setState({markers: markers})
+  console.log(this.state.markers)
 }
 
   render() {
     return (
       <div id='app'>
         <div id="wrapper">
-          <ListView venues={this.state.venues}/>
+          <ListView venues={this.state.venues} markers = { this.state.markers }/>
           <div id="map"></div>
         </div>
       </div>

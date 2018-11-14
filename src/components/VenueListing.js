@@ -3,8 +3,12 @@ import React, { Component } from 'react';
 
 class VenueListing extends Component {
 
+
+
 	render() {
-		console.log(this.props.venue)
+
+		console.log(this.props.markers)
+
 		return(
 			<div className="venue-listing">
 				<h3 className="venue-name">{this.props.venue.venue.name}</h3>
