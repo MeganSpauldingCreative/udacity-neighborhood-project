@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# About the App
+
+JacksonEATS is a app for finding somewhere to eat in Jackson, TN.
+
+# How to use the app
+
+Explore local restaurants by clicking on a marker on the map, or selecting a restaurant from the list of restaurants.
+
 ## Available Scripts
 
 In the project directory, you can run:
