@@ -50,7 +50,10 @@ html, body {
   width: 70%;
 }
 
+/*SIDEBAR STYLING*/
+
 #list-view {
+  height: 100vh;
   width: 26%;
   padding: 2%;
   text-align: center;
@@ -63,15 +66,34 @@ html, body {
   -moz-box-shadow: 9px 0px 35px -5px rgba(0,0,0,0.6);
   box-shadow: 9px 0px 35px -5px rgba(0,0,0,0.6);
   z-index: 1;
+  color: #516395;
+  overflow: scroll;
 
 }
 
 #list-view h1 {
   display: block;
-  margin-bottom: 1.5em;
   color: white;
+  font-size: 3em;
 }
 
 #list-view hr {
   border: solid white .25px;
+}
+
+.venue-listing {
+  background-color: rgba(260,260,260, .9);
+  border-radius: 10px;
+  padding: 1em;
+  margin: 2.5em;
+  /*Shadow*/
+  -webkit-box-shadow: 10px 10px 31px -8px rgba(0,0,0,0.56);
+  -moz-box-shadow: 10px 10px 31px -8px rgba(0,0,0,0.56);
+  box-shadow: 10px 10px 31px -8px rgba(0,0,0,0.56);
+}
+
+.venue-listing:hover{
+  cursor: pointer;
+  transform: translate(-2px, 2px);
+  background-color: rgba(260,260,260,.8);
 }
