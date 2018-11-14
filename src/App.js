@@ -9,16 +9,10 @@ class App extends Component {
 
   state = {
     showingVenues: [],
-    parameters: {
-      client_id: "5RIR2S4LZ2SJYZ5UKKP5T1JP5O3SIHLAEGYJOEL2YE30MZ2J",
-      client_secret: "IZIRWZ1T1ER0ECBDASJ1LOCOZGZXC1I25AAZPCU5DTKTZQDG",
-      query: "restaurants",
-      near: "Jackson, TN",
-      v: "20182507"
-    },
     markers: [],
     allVenues: [],
-    map: {}
+    map: {},
+    selectedCuisine: "select"
   }
 
   componentDidMount () {
@@ -37,15 +31,29 @@ class App extends Component {
 
   getVenues = () => {
 
+    // Uses FourSquare Developer API to get locations
+
     const endPoint = 'https://api.foursquare.com/v2/venues/explore?'
 
-    axios.get(endPoint + new URLSearchParams(this.state.parameters))
+    const parameters = {      
+
+      client_id: "5RIR2S4LZ2SJYZ5UKKP5T1JP5O3SIHLAEGYJOEL2YE30MZ2J",
+      client_secret: "IZIRWZ1T1ER0ECBDASJ1LOCOZGZXC1I25AAZPCU5DTKTZQDG",
+      query: "restaurants",
+      near: "Jackson, TN",
+      v: "20182507"
+    }
+
+    axios.get(endPoint + new URLSearchParams(parameters))
     .then(resp => {
       this.setState({allVenues: resp.data.response.groups[0].items})
       this.setState(
       {showingVenues: resp.data.response.groups[0].items}, this.renderMap())
     })
-    .catch((err) => console.log("ERROR!!" + err))
+    .catch((err) => {
+      console.log("ERROR!!" + err)
+      alert("Oops, something went wrong! Try again in a few minutes.")
+    })
 
   }
 
@@ -98,6 +106,7 @@ class App extends Component {
 // Filter out venues from drop down menu
 
 filterVenues = (query) => {
+  this.setState({selectedCuisine : query})
   if (query !== "restaurants"){
       // filtering markers
       this.state.markers.forEach(
@@ -147,14 +156,9 @@ listItemClick = (venueID) => {
 
     return (
       <div id='app'>
-        <div id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-        </div>
         <div id="wrapper">
-          <ListView venues={this.state.showingVenues} markers = { this.state.markers } filterVenues={this.filterVenues} listItemClick={this.listItemClick}/>
-          <div id="map"></div>
+          <ListView venues={this.state.showingVenues} selectedCuisine = {this.state.selectedCuisine} markers = { this.state.markers } filterVenues={this.filterVenues} listItemClick={this.listItemClick}/>
+          <div id="map" role="application"></div>
         </div>
       </div>
     );

@@ -4,14 +4,14 @@ class Selector extends Component {
 
 	render() {
 		return(
-			<div className="food-type-selector">
-				<select value="select" onChange={(event) => this.props.filterVenues(event.target.value)}>
-				  <option value="select" disabled>Select A Cuisine</option>
-				  <option value="mexican">Mexican</option>
-				  <option value="pizza">Pizza</option>
-				  <option value="chinese">Chinese</option>
-				  <option value="bbq">BBQ</option>
-				  <option value="restaurants">All</option>
+			<div tabIndex="2" className="food-type-selector">
+				<select value={this.props.selectedCuisine} onChange={(event) => this.props.filterVenues(event.target.value)}>
+				  <option value="select" disabled aria-label="Select A Cuisine">Select A Cuisine</option>
+				  <option value="mexican" role="option">Mexican</option>
+				  <option value="pizza" role="option">Pizza</option>
+				  <option value="chinese" role="option">Chinese</option>
+				  <option value="bbq" role="option">BBQ</option>
+				  <option value="restaurants" role="option">All</option>
 				</select>
 			</div>
 		)

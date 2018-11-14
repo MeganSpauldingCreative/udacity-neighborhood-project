@@ -8,6 +8,14 @@ export function loadScript() {
     script.defer = true;
 
     document.body.appendChild(script);
+
+    window.gm_authFailure = () => {
+  		alert("Oh No! Something went wrong! Try again soon.")
+	};
+
+	script.onerror = () => {
+  		alert("Oh No! Something went wrong! Try again soon.")
+	};
 }
 
 
