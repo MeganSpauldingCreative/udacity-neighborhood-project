@@ -1,3 +1,5 @@
+// Loads the Google API script into the app
+
 export function loadScript() {
     const script = document.createElement("script");
 
@@ -7,3 +9,8 @@ export function loadScript() {
 
     document.body.appendChild(script);
 }
+
+
+
+declare var infoWindow;
+export default window.infoWindow;

@@ -8,9 +8,9 @@ class ListView extends Component {
 		return(
 			<div id="list-view">
 				<h1>JacksonEATS</h1>
-				<Selector filterVenues={this.props.filterVenues}/>
+				<Selector filterVenues={this.props.filterVenues} listItemClick={this.props.listItemClick} />
 				<hr/>
-				{this.props.venues.map((venue, key) => (<VenueListing venue={venue} key={key} markers={this.props.markers} />))}
+				{this.props.venues.map((venue, key) => (<VenueListing venue={venue} key={key} markers={this.props.markers} listItemClick={this.props.listItemClick}/>))}
 			</div>
 		)
 	}
