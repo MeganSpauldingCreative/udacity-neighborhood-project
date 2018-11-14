@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # About the App
 
-JacksonEATS is a app for finding somewhere to eat in Jackson, TN.
+JacksonEATS is a app for finding somewhere to eat in Jackson, TN using the FourSquare API
 
 # How to use the app
 
