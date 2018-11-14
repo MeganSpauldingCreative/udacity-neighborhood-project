@@ -7,7 +7,7 @@ import ListView from './components/ListView.js'
 class App extends Component {
 
   state = {
-    venues: [],
+    showingVenues: [],
     parameters: {
       client_id: "5RIR2S4LZ2SJYZ5UKKP5T1JP5O3SIHLAEGYJOEL2YE30MZ2J",
       client_secret: "IZIRWZ1T1ER0ECBDASJ1LOCOZGZXC1I25AAZPCU5DTKTZQDG",
@@ -15,12 +15,14 @@ class App extends Component {
       near: "Jackson, TN",
       v: "20182507"
     },
-    markers: []
+    markers: [],
+    allVenues: []
   }
 
   componentDidMount () {
     this.getVenues()
   }
+
 
   // Render Google Map
   
@@ -37,8 +39,11 @@ class App extends Component {
 
     axios.get(endPoint + new URLSearchParams(this.state.parameters))
     .then(resp => {
-      this.setState({venues: resp.data.response.groups[0].items}, this.renderMap())
-    }).catch((err) => console.log("ERROR!!" + err))
+      this.setState({allVenues: resp.data.response.groups[0].items})
+      this.setState(
+      {showingVenues: resp.data.response.groups[0].items}, this.renderMap())
+    })
+    .catch((err) => console.log("ERROR!!" + err))
 
   }
 
@@ -54,7 +59,7 @@ class App extends Component {
 
   const markers = []
 
-  this.state.venues.map( v => {
+  this.state.showingVenues.map( v => {
     var contentString = '<h3>'+ v.venue.name + '</h3';
 
 
@@ -75,12 +80,11 @@ class App extends Component {
   })
 
   this.setState({markers: markers})
-  console.log(this.state.markers)
-  console.log(this.state.venues)
+  console.log(this.state.allVenues)
+  console.log(this.state.showingVenues)
 }
 
 filterVenues = (query) => {
-  console.log(query)
   if (query !== "restaurants"){
       this.state.markers.forEach(
       marker => {
@@ -88,20 +92,25 @@ filterVenues = (query) => {
       marker.setVisible(true) :
       marker.setVisible(false)
       })
-
-      let filteredVenues = this.state.venues.filter(v => v.venue.name.toLowerCase().includes(query)) 
+      let filteredVenues = this.state.allVenues.filter(v => v.venue.name.toLowerCase().includes(query.toLowerCase()))
       console.log(filteredVenues)
+      this.setState({showingVenues: filteredVenues})
+
 
   } else{
         this.state.markers.forEach(marker => {marker.setVisible(true)})
-      }
+        this.setState({showingVenues: this.state.allVenues})
+  
+
+  }
+
 }
 
   render() {
     return (
       <div id='app'>
         <div id="wrapper">
-          <ListView venues={this.state.venues} markers = { this.state.markers } filterVenues={this.filterVenues}/>
+          <ListView venues={this.state.showingVenues} markers = { this.state.markers } filterVenues={this.filterVenues}/>
           <div id="map"></div>
         </div>
       </div>
