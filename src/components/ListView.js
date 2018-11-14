@@ -8,7 +8,7 @@ class ListView extends Component {
 		return(
 			<div id="list-view">
 				<h1>JacksonEATS</h1>
-				<Selector />
+				<Selector filterVenues={this.props.filterVenues}/>
 				<hr/>
 				{this.props.venues.map((venue, key) => (<VenueListing venue={venue} key={key} markers={this.props.markers} />))}
 			</div>

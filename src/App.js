@@ -42,6 +42,7 @@ class App extends Component {
 
   }
 
+
   initMap = () => {
 
   var infowindow = new window.google.maps.InfoWindow();
@@ -75,13 +76,32 @@ class App extends Component {
 
   this.setState({markers: markers})
   console.log(this.state.markers)
+  console.log(this.state.venues)
+}
+
+filterVenues = (query) => {
+  console.log(query)
+  if (query !== "restaurants"){
+      this.state.markers.forEach(
+      marker => {
+      marker.title.toLowerCase().includes(query.toLowerCase()) === true ?
+      marker.setVisible(true) :
+      marker.setVisible(false)
+      })
+
+      let filteredVenues = this.state.venues.filter(v => v.venue.name.toLowerCase().includes(query)) 
+      console.log(filteredVenues)
+
+  } else{
+        this.state.markers.forEach(marker => {marker.setVisible(true)})
+      }
 }
 
   render() {
     return (
       <div id='app'>
         <div id="wrapper">
-          <ListView venues={this.state.venues} markers = { this.state.markers }/>
+          <ListView venues={this.state.venues} markers = { this.state.markers } filterVenues={this.filterVenues}/>
           <div id="map"></div>
         </div>
       </div>

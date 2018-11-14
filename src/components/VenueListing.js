@@ -7,7 +7,6 @@ class VenueListing extends Component {
 
 	render() {
 
-		console.log(this.props.markers)
 
 		return(
 			<div className="venue-listing">

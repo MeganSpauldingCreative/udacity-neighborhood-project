@@ -5,13 +5,13 @@ class Selector extends Component {
 	render() {
 		return(
 			<div className="food-type-selector">
-				<select value="select" onChange={(event) => alert('hi')}>
+				<select value="select" onChange={(event) => this.props.filterVenues(event.target.value)}>
 				  <option value="select" disabled>Select A Cuisine</option>
 				  <option value="mexican">Mexican</option>
 				  <option value="pizza">Pizza</option>
-				  <option value="asian">Asian</option>
+				  <option value="chinese">Chinese</option>
 				  <option value="bbq">BBQ</option>
-				  <option value="all">All</option>
+				  <option value="restaurants">All</option>
 				</select>
 			</div>
 		)
