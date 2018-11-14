@@ -11,7 +11,7 @@ class App extends Component {
     parameters: {
       client_id: "5RIR2S4LZ2SJYZ5UKKP5T1JP5O3SIHLAEGYJOEL2YE30MZ2J",
       client_secret: "IZIRWZ1T1ER0ECBDASJ1LOCOZGZXC1I25AAZPCU5DTKTZQDG",
-      query: "coffee",
+      query: "restaurants",
       near: "Jackson, TN",
       v: "20182507"
     }
